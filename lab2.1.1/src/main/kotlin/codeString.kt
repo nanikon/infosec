@@ -11,12 +11,13 @@ private fun mapString(input: String, pair: RectanglePair, func: (Char, Char) -> 
         } else {
             val firstLetter = input[i]
             var secondLetter: Char
+            val buffer = mutableListOf<Char>()
             if (i + 1 == input.length) {
                 secondLetter = pair.getAdditionalLetter()
             } else {
                 secondLetter = input[i + 1]
                 while (!pair.containsLetter(secondLetter)) {
-                    result.add(secondLetter)
+                    buffer.add(secondLetter)
                     i++
                     secondLetter = if (i + 1 == input.length) {
                         pair.getAdditionalLetter()
@@ -27,6 +28,7 @@ private fun mapString(input: String, pair: RectanglePair, func: (Char, Char) -> 
             }
             val resultPair = func(firstLetter, secondLetter)
             result.add(resultPair.first)
+            if (buffer.isNotEmpty()) result.addAll(buffer)
             result.add(resultPair.second)
         }
         i += 2

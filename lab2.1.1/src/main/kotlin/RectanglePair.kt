@@ -69,7 +69,13 @@ abstract class RectanglePair(
    }
 
    override fun toString(): String {
-      return leftMatrix.toString()
+      val result = StringBuilder()
+      for (i in leftMatrix.indices) {
+         val left = leftMatrix[i].joinToString(separator = " ")
+         val right = rightMatrix[i].joinToString(separator = " ")
+         result.append("$left\t\t$right\n")
+      }
+      return result.toString()
    }
 
    fun containsLetter(letter: Char) = letterSet.contains(letter)
